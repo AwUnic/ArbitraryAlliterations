@@ -9,4 +9,5 @@ ngen/ngen_app/
 ngen/ngen_env/
 ngen/wsgi.py.old
 ngen/wsgi.pyc
-
+ngen/helper.py
+*__pycache__*
