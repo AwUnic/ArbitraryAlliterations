@@ -5,7 +5,7 @@ $(function(){
   $('#reload').click(function(){
   	var inArr = [];
  	 $('.toggle.active').each(function() {
-	inArr.push($(this).text());	
+	inArr.push($(this).text().toLowerCase());	
   	});
 	if(inArr.length == 0){
 	$('#namegen').html('<p>select<br>categories');	
