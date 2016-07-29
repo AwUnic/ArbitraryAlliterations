@@ -11,3 +11,5 @@ ngen/wsgi.py.old
 ngen/wsgi.pyc
 ngen/helper.py
 *__pycache__*
+main.css
+deploy.sh
