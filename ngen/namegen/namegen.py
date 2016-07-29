@@ -11,9 +11,9 @@ def gen(catAlist, catNlist, letter):
 
     with con:
         cur = con.cursor()
-        cur.execute(cmdnoun,(tuple(catNlist+[letter])))
+        cur.execute(cmdnoun,(catNlist+[letter]))
         rowsN = cur.fetchall()
-        cur.execute(cmdadj,(tuple(catAlist+[letter])))
+        cur.execute(cmdadj,(catAlist+[letter]))
         rowsA = cur.fetchall()
         if len(rowsN) and len(rowsA):
             return random.choice(rowsA)[0]+"<br>"+random.choice(rowsN)[0]
