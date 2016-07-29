@@ -1,15 +1,15 @@
 var main = function(){
-$('#animal').addClass('active');
+$('.default').addClass('active');
 }
 $(function(){
   $('#reload').click(function(){
   	var inArr = [];
- 	 $('.toggle.active').each(function() {
-	inArr.push($(this).text().toLowerCase());	
+ 	 $('.noun.active').each(function() {
+	inArr.push($(this).text().toLowerCase());
   	});
 	if(inArr.length == 0){
-	$('#namegen').html('<p>select<br>categories');	
-	} else{  	
+	$('#namegen').html('<p>select<br>categories');
+	} else{
 	$.ajax({
        	type: "GET",
 	url: "scripts",
@@ -18,12 +18,12 @@ $(function(){
 	},
 	success: function(msg){
 	$('#namegen').html(msg);
-	}	            
+	}
 	})
-	}	
+	}
     });
 
-    
+
 })
 
 $(function() {
