@@ -21,7 +21,8 @@ $(function(){
   });
   if(inArr.length == lntmplet){
     	$('#namegen').html('<p>select<br>letters');
-  }
+	return; 
+} 
 	if((inArr.length - lntmp - 1) == 0 || lntmp == 0 ){
 	$('#namegen').html('<p>select<br>categories');
 	} else{
