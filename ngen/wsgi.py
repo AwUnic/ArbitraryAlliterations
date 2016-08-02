@@ -11,11 +11,11 @@ def  application(env, start_response):
 	categories = parameters['types[]']
 	try:
 		brkC = categories.index(':catbrk:')
-		brkL = categories.length+1
+		brkL = len(categories)+1
 	except:
 		return ['Invalid Input'.encode('utf8')] 
 	letter = random.choice(string.ascii_uppercase)
-	catA = categories[brkC+1:brkL]
+	catA = categories[brkC+1:]
 	catN = categories[:brkC]
 	resp = '<p>'+namegen.gen(catA,catN,letter)+'</p>\n'
 	return [resp.encode('utf8')]

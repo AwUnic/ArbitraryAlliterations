@@ -1,5 +1,4 @@
 var main = function(){
-  alert('hola')
 $('.default').addClass('active');
 }
 $(function(){
@@ -14,7 +13,6 @@ $(function(){
     $('.adj.active').each(function(){
       inArr.push($(this).text().toLowerCase());
     });
-  }
 	if((inArr.length - lntmp - 1) == 0 || lntmp == 0 ){
 	$('#namegen').html('<p>select<br>categories');
 	} else{
