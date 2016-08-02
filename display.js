@@ -1,5 +1,6 @@
 var main = function(){
 $('.default').addClass('active');
+$('#allnone').removeClass('letter');
 }
 $(function(){
   $('#reload').click(function(){
@@ -13,6 +14,15 @@ $(function(){
     $('.adj.active').each(function(){
       inArr.push($(this).text().toLowerCase());
     });
+  inArr.push(':letbrk:');
+  lntmplet = inArr.length
+  $('.letter.toggle.active').each(function(){
+    inArr.push($(this).text().toUpperCase());
+  });
+  if(inArr.length == lntmplet){
+    	$('#namegen').html('<p>select<br>letters');
+	return; 
+} 
 	if((inArr.length - lntmp - 1) == 0 || lntmp == 0 ){
 	$('#namegen').html('<p>select<br>categories');
 	} else{
@@ -41,6 +51,26 @@ $(function() {
 			div.addClass('active');
 		}
 	});
+})
+
+  $(function() {
+  	$('#allnone').click(function() {
+  		var div = $(this);
+  		if(div.hasClass('active')) {
+        $('.letter').each(function(){
+          $(this).addClass('active');
+        });
+  			div.removeClass('active');
+        div.text(' NONE');
+
+  		} else {
+  			div.addClass('active');
+        div.text(' ALL');
+        $('.letter').each(function(){
+          $(this).removeClass('active');
+        });
+  		}
+  	});
 })
 
 $(document).ready(main)
