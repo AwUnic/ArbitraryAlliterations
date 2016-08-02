@@ -1,10 +1,12 @@
 var main = function(){
+  alert('hola')
 $('.default').addClass('active');
 $('#allnone').removeClass('letter');
 }
 $(function(){
   $('#reload').click(function(){
   	var inArr = [];
+
  	 $('.noun.active').each(function() {
 	inArr.push($(this).text().toLowerCase());
   	});
