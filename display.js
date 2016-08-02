@@ -1,5 +1,4 @@
 var main = function(){
-  alert('hola')
 $('.default').addClass('active');
 $('#allnone').removeClass('letter');
 }
@@ -61,7 +60,7 @@ $(function() {
           $(this).addClass('active');
         });
   			div.removeClass('active');
-        div.text(' NON');
+        div.text(' NONE');
 
   		} else {
   			div.addClass('active');
