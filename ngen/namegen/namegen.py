@@ -5,17 +5,23 @@ import string
 import re
 def gen(catAlist, catNlist, letter):
     con = lite.connect('namegen/namegen.db')
-
-    cmdnoun="select noun from nouns join categories on category=id where name in ("+ '?,'*(len(catNlist)-1) +"?)  and char=?"
-    cmdadj="select adjective from adjectives join adjcategories on category=id where name in ("+ '?,'*(len(catAlist)-1) +"?) and char=?"
-
+    getcat = "select id from categories where name in ("+"?,"*(len(catAlist)+len(catNlist)-1)+"?)"
+    selectfromA ="select a.word,n.word from words a, words n where a.type_id=2 and n.type_id=1 and a.cat_id in ("
+    selectfromB =") and n.cat_id in("
+    selectfromC =") and substr(a.word,1,1) = substr(n.word,1,1) and substr(n.word,1,1)=?"
     with con:
         cur = con.cursor()
-        cur.execute(cmdnoun,(catNlist+[letter]))
-        rowsN = cur.fetchall()
-        cur.execute(cmdadj,(catAlist+[letter]))
-        rowsA = cur.fetchall()
-        if len(rowsN) and len(rowsA):
-            return random.choice(rowsA)[0]+"<br>"+random.choice(rowsN)[0]
+    #    print(getcat,catAlist,catNlist)
+        cur.execute(getcat,catAlist+catNlist)
+        cat_ids = cur.fetchall()
+        cat_ids = [item for sublist in cat_ids for item in sublist]
+        cat_idstr = ','.join(map(str, cat_ids))
+    #    print(cat_ids)
+    #    print(selectfromA+cat_idstr+selectfromB+cat_idstr+selectfromC )
+        cur.execute(selectfromA+cat_idstr+selectfromB+cat_idstr+selectfromC ,[letter])
+        words = cur.fetchall()
+    #    print(words)
+        if len(words):
+            return "<br>".join(random.choice(words))
         else:
             return "Impossible<br>Input"
