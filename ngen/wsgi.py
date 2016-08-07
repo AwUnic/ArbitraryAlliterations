@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sqlite3 as lite
-import sys, random
+import sys
 import string
 from namegen import namegen
 from cgi import parse_qs, escape
@@ -16,6 +16,6 @@ def  application(env, start_response):
 		return ['Invalid Input'.encode('utf8')]
 	catN = categories[:brkC]
 	catA = categories[brkC+1:brkL]
-	letter = random.choice(categories[brkL+1:])
-	resp = '<p>'+namegen.gen(catA,catN,letter)+'</p>\n'
+	letters = categories[brkL+1:]
+	resp = '<p>'+namegen.gen(catA,catN,letters)+'</p>\n'
 	return [resp.encode('utf8')]
