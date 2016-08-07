@@ -8,19 +8,20 @@ def gen(catAlist, catNlist, letter):
     getcat = "select id from categories where name in ("+"?,"*(len(catAlist)+len(catNlist)-1)+"?)"
     selectfromA ="select a.word,n.word from words a, words n where a.type_id=2 and n.type_id=1 and a.cat_id in ("
     selectfromB =") and n.cat_id in("
-    selectfromC =") and substr(a.word,1,1) = substr(n.word,1,1) and substr(n.word,1,1)=?"
+    selectfromC =") and substr(a.word,1,1) = substr(n.word,1,1) and substr(n.word,1,1) in("+"?,"*(len(letter)-1)+"?)"
     with con:
         cur = con.cursor()
-    #    print(getcat,catAlist,catNlist)
+#        print(letter,catAlist,catNlist)
+	
         cur.execute(getcat,catAlist+catNlist)
         cat_ids = cur.fetchall()
         cat_ids = [item for sublist in cat_ids for item in sublist]
         cat_idstr = ','.join(map(str, cat_ids))
-    #    print(cat_ids)
-    #    print(selectfromA+cat_idstr+selectfromB+cat_idstr+selectfromC )
-        cur.execute(selectfromA+cat_idstr+selectfromB+cat_idstr+selectfromC ,[letter])
+#       print(cat_ids)
+#       print(selectfromA+cat_idstr+selectfromB+cat_idstr+selectfromC )
+        cur.execute(selectfromA+cat_idstr+selectfromB+cat_idstr+selectfromC ,letter)
         words = cur.fetchall()
-    #    print(words)
+#      print(words)
         if len(words):
             return "<br>".join(random.choice(words))
         else:
